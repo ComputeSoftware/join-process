@@ -1,0 +1,39 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/clojure:boot-2.7.2
+
+    working_directory: ~/repo
+
+    environment:
+      JVM_OPTS: -Xmx3200m
+      BOOT_JVM_OPTIONS: "-Xms512m -Xmx1024m"
+      BOOT_WATCHERS_DISABLE: "yes"
+    
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: project
+
+      - run:
+          name: "Download profile.boot"
+          command: curl https://raw.githubusercontent.com/ComputeSoftware/boot-ci-configure-repositories/ac9ab204994873c546df7d5bb4a24e69cd31b75c/profile.boot -o ~/repo/profile.boot
+
+      - run: boot deploy
+
+      - save_cache:
+          paths:
+            - ~/.m2
+            - ~/.boot/cache/lib
+            - ~/.boot/cache/bin
+          key: project
+
+workflows:
+  version: 2
+  ci-workflow:
+    jobs:
+      - build:
+          context: clojure-env
