@@ -7,8 +7,6 @@
   (:import (java.text SimpleDateFormat)
            (java.util Date)))
 
-(def abort identity)
-
 (def ^:private pallette (cycle [:green :blue :yellow :magenta :red]))
 
 (def ^:private time-formatter (SimpleDateFormat. "HH:mm:ss"))
@@ -72,8 +70,7 @@ left hanging that may need killed manually
 Sorry about the inconvenience." :red))
   (println)
   (doseq [proc procs]
-    (sh/destroy proc))
-  (abort))
+    (sh/destroy proc)))
 
 (defn- wait-for-early-exit
   "Blocks until at least one of the running processes produces an exit code

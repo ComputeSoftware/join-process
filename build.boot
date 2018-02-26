@@ -1,5 +1,5 @@
 (def project 'join-process)
-(def version "1.0")
+(def version "1.1")
 
 (set-env! :resource-paths #{"src"}
           :repositories #(conj % ["private" {:url "https://repo.deps.co/computesoftware/releases"}])
