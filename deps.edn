@@ -1,0 +1,4 @@
+{:deps {org.clojure/clojure {:mvn/version "1.9.0"}
+        me.raynes/conch     {:mvn/version "0.7.0"}
+        primrose            {:mvn/version "1.0.0"}
+        clansi              {:mvn/version "1.0.0"}}}
